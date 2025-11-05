@@ -24,9 +24,9 @@
         <div class="flex items-start justify-between mb-4">
           <div class="flex-1">
             <h3 class="text-xl font-bold text-slate-800 mb-2">
-              {{ trainer.last_name }} {{ trainer.first_name }} {{ trainer.patronymic }}
+              {{ trainer.full_name }}
             </h3>
-            <p class="text-slate-600 mb-2">{{ trainer.specialization }}</p>
+            <p class="text-slate-600 mb-2">{{ trainer.specialization || 'Специализация не указана' }}</p>
           </div>
           <div class="w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-xl flex items-center justify-center">
             <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -40,13 +40,13 @@
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
             </svg>
-            <span>{{ trainer.phone_number }}</span>
+            <span>{{ trainer.phone }}</span>
           </div>
           <div class="flex items-center gap-2 text-sm text-slate-600">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
-            <span>Стаж: {{ trainer.experience_years }} {{ pluralizeYears(trainer.experience_years) }}</span>
+            <span>{{ trainer.email }}</span>
           </div>
         </div>
 
@@ -71,34 +71,29 @@
     <!-- Create/Edit Modal -->
     <Modal v-model="showModal" :title="editingTrainer ? 'Редактировать тренера' : 'Добавить тренера'">
       <form @submit.prevent="saveTrainer" class="space-y-4">
-        <div class="grid grid-cols-3 gap-4">
-          <div>
-            <label class="block text-sm font-semibold text-slate-700 mb-2">Фамилия *</label>
-            <input v-model="form.last_name" type="text" required class="input" />
-          </div>
-          <div>
-            <label class="block text-sm font-semibold text-slate-700 mb-2">Имя *</label>
-            <input v-model="form.first_name" type="text" required class="input" />
-          </div>
-          <div>
-            <label class="block text-sm font-semibold text-slate-700 mb-2">Отчество</label>
-            <input v-model="form.patronymic" type="text" class="input" />
-          </div>
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-2">ФИО *</label>
+          <input v-model="form.full_name" type="text" required placeholder="Иванов Иван Иванович" class="input" />
         </div>
 
         <div>
-          <label class="block text-sm font-semibold text-slate-700 mb-2">Специализация *</label>
-          <input v-model="form.specialization" type="text" required placeholder="Например: Фитнес, Йога, Бокс" class="input" />
+          <label class="block text-sm font-semibold text-slate-700 mb-2">Email *</label>
+          <input v-model="form.email" type="email" required placeholder="trainer@example.com" class="input" />
         </div>
 
         <div>
           <label class="block text-sm font-semibold text-slate-700 mb-2">Телефон *</label>
-          <input v-model="form.phone_number" type="tel" required placeholder="+7 (999) 123-45-67" class="input" />
+          <input v-model="form.phone" type="tel" required placeholder="+7 (999) 123-45-67" class="input" />
         </div>
 
         <div>
-          <label class="block text-sm font-semibold text-slate-700 mb-2">Стаж работы (лет) *</label>
-          <input v-model.number="form.experience_years" type="number" required min="0" class="input" />
+          <label class="block text-sm font-semibold text-slate-700 mb-2">Адрес</label>
+          <input v-model="form.address" type="text" placeholder="г. Москва, ул. Ленина, д. 1" class="input" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-2">Специализация</label>
+          <input v-model="form.specialization" type="text" placeholder="Например: Фитнес, Йога, Бокс" class="input" />
         </div>
 
         <div v-if="error" class="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
