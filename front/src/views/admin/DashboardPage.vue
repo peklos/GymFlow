@@ -2,7 +2,7 @@
   <div>
     <div class="mb-8">
       <h1 class="text-3xl font-bold text-slate-800 mb-2">Дашборд</h1>
-      <p class="text-slate-600">Обзор системы управления спортзалом</p>
+      <p class="text-slate-600" style="color: #0f172a !important;">Обзор системы управления спортзалом</p>
     </div>
 
     <LoadingSpinner v-if="isLoading" text="Загрузка статистики..." />

@@ -74,21 +74,15 @@ def get_dashboard_stats(db: Session = Depends(database.get_db)):
     ]
 
     return {
-        "overview": {
-            "total_clients": total_clients,
-            "total_trainers": total_trainers,
-            "total_sections": total_sections,
-            "total_bookings": total_bookings
-        },
-        "bookings": {
-            "pending": pending_bookings,
-            "approved": approved_bookings
-        },
-        "attendance": {
-            "total_visits": total_visits,
-            "present_visits": present_visits,
-            "attendance_rate": attendance_rate
-        },
+        "total_clients": total_clients,
+        "total_trainers": total_trainers,
+        "total_sections": total_sections,
+        "total_bookings": total_bookings,
+        "pending_bookings": pending_bookings,
+        "approved_bookings": approved_bookings,
+        "total_visits": total_visits,
+        "present_visits": present_visits,
+        "attendance_rate": attendance_rate,
         "popular_sections": popular_sections_list,
         "active_clients": active_clients_list
     }
