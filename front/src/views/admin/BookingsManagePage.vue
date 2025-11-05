@@ -50,7 +50,7 @@
               <td class="py-3 px-4 font-medium">{{ booking.client_name }}</td>
               <td class="py-3 px-4">{{ booking.section_name }}</td>
               <td class="py-3 px-4">{{ formatDate(booking.booking_date) }}</td>
-              <td class="py-3 px-4">{{ booking.time_start }}</td>
+              <td class="py-3 px-4">-</td>
               <td class="py-3 px-4">
                 <span
                   class="badge"
@@ -122,10 +122,6 @@
               </p>
             </div>
             <div>
-              <p class="text-sm text-slate-500">Дата создания</p>
-              <p class="font-semibold text-slate-800">{{ formatDate(selectedBooking.created_at) }}</p>
-            </div>
-            <div>
               <p class="text-sm text-slate-500">Дата занятия</p>
               <p class="font-semibold text-slate-800">{{ formatDate(selectedBooking.booking_date) }}</p>
             </div>
@@ -148,26 +144,18 @@
           </div>
         </div>
 
-        <!-- Schedule Info -->
+        <!-- Section Info -->
         <div class="border-b border-slate-200 pb-4">
-          <h3 class="text-lg font-bold text-slate-800 mb-3">Расписание</h3>
+          <h3 class="text-lg font-bold text-slate-800 mb-3">Секция</h3>
           <div class="bg-slate-50 rounded-lg p-4">
             <div class="grid grid-cols-2 gap-3">
               <div>
-                <p class="text-sm text-slate-500">Секция</p>
+                <p class="text-sm text-slate-500">Название секции</p>
                 <p class="font-semibold text-slate-800">{{ selectedBooking.section_name || 'Не указано' }}</p>
               </div>
               <div>
-                <p class="text-sm text-slate-500">ID расписания</p>
-                <p class="font-semibold text-slate-800">{{ selectedBooking.schedule_id }}</p>
-              </div>
-              <div>
-                <p class="text-sm text-slate-500">Время начала</p>
-                <p class="font-semibold text-slate-800">{{ selectedBooking.time_start || 'Не указано' }}</p>
-              </div>
-              <div>
-                <p class="text-sm text-slate-500">Время окончания</p>
-                <p class="font-semibold text-slate-800">{{ selectedBooking.time_end || 'Не указано' }}</p>
+                <p class="text-sm text-slate-500">ID секции</p>
+                <p class="font-semibold text-slate-800">{{ selectedBooking.section_id }}</p>
               </div>
             </div>
           </div>
@@ -249,6 +237,7 @@ const updateStatus = async (booking, newStatus) => {
 const formatDate = (dateString) => {
   if (!dateString) return 'Не указано'
   const date = new Date(dateString)
+  if (isNaN(date.getTime())) return 'Не указано'
   return date.toLocaleDateString('ru-RU')
 }
 </script>
