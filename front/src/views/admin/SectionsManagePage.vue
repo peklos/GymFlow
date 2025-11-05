@@ -3,7 +3,7 @@
     <div class="mb-8 flex items-center justify-between">
       <div>
         <h1 class="text-3xl font-bold text-slate-800 mb-2">Управление секциями</h1>
-        <p class="text-slate-600">Создание и редактирование секций</p>
+        <p class="text-slate-600" style="color: #0f172a !important;">Создание и редактирование секций</p>
       </div>
       <button @click="openCreateModal" class="btn btn-primary">
         <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

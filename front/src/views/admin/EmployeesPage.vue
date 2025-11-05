@@ -3,7 +3,7 @@
     <div class="mb-8 flex items-center justify-between">
       <div>
         <h1 class="text-3xl font-bold text-slate-800 mb-2">Управление сотрудниками</h1>
-        <p class="text-slate-600">Управление персоналом системы</p>
+        <p class="text-slate-600" style="color: #0f172a !important;">Управление персоналом системы</p>
       </div>
       <button @click="openCreateModal" class="btn btn-primary">
         <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -19,12 +19,12 @@
       <div v-for="employee in employees" :key="employee.id" class="card">
         <div class="flex items-start justify-between mb-4">
           <div class="flex-1">
-            <h3 class="text-xl font-bold mb-2" style="color: #1e293b !important;">{{ employee.login }}</h3>
+            <h3 class="text-xl font-bold mb-2" style="color: #ffffff !important;">{{ employee.login }}</h3>
             <span
               class="badge"
               :class="{
-                'badge-danger': employee.role_name === 'Администратор',
-                'badge-info': employee.role_name === 'Менеджер'
+                'badge-warning': employee.role_name === 'Администратор',
+                'badge-success': employee.role_name === 'Менеджер'
               }"
             >
               {{ employee.role_name || 'Не указано' }}
@@ -38,7 +38,7 @@
         </div>
 
         <div class="space-y-2 mb-4 text-sm">
-          <div class="flex items-center gap-2" style="color: #475569 !important;">
+          <div class="flex items-center gap-2" style="color: #ffffff !important;">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
             </svg>

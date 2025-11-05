@@ -2,7 +2,7 @@
   <div>
     <div class="mb-8">
       <h1 class="text-3xl font-bold text-slate-800 mb-2">Управление бронированиями</h1>
-      <p class="text-slate-600">Просмотр и управление бронированиями клиентов</p>
+      <p class="text-slate-600" style="color: #0f172a !important;">Просмотр и управление бронированиями клиентов</p>
     </div>
 
     <div class="mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -44,7 +44,7 @@
             <tr
               v-for="booking in bookings"
               :key="booking.id"
-              class="border-b border-slate-100 hover:bg-blue-50"
+              class="border-b border-slate-100"
             >
               <td class="py-3 px-4">{{ booking.id }}</td>
               <td class="py-3 px-4 font-medium">{{ booking.client_name }}</td>
