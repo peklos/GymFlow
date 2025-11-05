@@ -191,8 +191,8 @@
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="py-20 relative overflow-hidden">
+    <!-- CTA Section - Only show for non-authenticated users -->
+    <section v-if="!authStore.isAuthenticated" class="py-20 relative overflow-hidden">
       <div class="container mx-auto px-4">
         <div class="card bg-gradient-to-br from-primary-500 to-accent-500 text-white text-center max-w-5xl mx-auto relative overflow-hidden">
           <!-- Background Pattern -->
@@ -251,9 +251,11 @@ import MainLayout from '@/components/layout/MainLayout.vue'
 import SectionCard from '@/components/sections/SectionCard.vue'
 import LoadingSpinner from '@/components/common/LoadingSpinner.vue'
 import { useSectionsStore } from '@/stores/sections'
+import { useAuthStore } from '@/stores/auth'
 
 const router = useRouter()
 const sectionsStore = useSectionsStore()
+const authStore = useAuthStore()
 
 const popularSections = ref([])
 const isLoading = ref(false)
