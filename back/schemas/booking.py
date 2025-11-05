@@ -10,7 +10,8 @@ class BookingBase(BaseModel):
 
 
 class BookingCreate(BookingBase):
-    pass
+    client_id: int
+    booking_date: date
 
 
 class BookingUpdate(BaseModel):

@@ -128,13 +128,13 @@
     <Modal v-model="showBookingModal" title="Забронировать занятие">
       <div v-if="selectedSchedule" class="space-y-4">
         <div>
-          <h4 class="font-semibold text-slate-800 mb-2">{{ selectedSchedule.section_name }}</h4>
-          <p class="text-slate-600">Тренер: {{ selectedSchedule.trainer_name }}</p>
-          <p class="text-slate-600">{{ selectedSchedule.day_of_week }}, {{ formatTime(selectedSchedule.time_start) }}</p>
+          <h4 class="font-semibold text-slate-100 mb-2">{{ selectedSchedule.section_name }}</h4>
+          <p class="text-slate-300">Тренер: {{ selectedSchedule.trainer_name }}</p>
+          <p class="text-slate-300">{{ selectedSchedule.day_of_week }}, {{ formatTime(selectedSchedule.time_start) }}</p>
         </div>
 
         <div>
-          <label class="block text-sm font-semibold text-slate-700 mb-2">
+          <label class="block text-sm font-semibold text-slate-200 mb-2">
             Дата занятия
           </label>
           <input
@@ -145,7 +145,7 @@
           />
         </div>
 
-        <div v-if="bookingError" class="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+        <div v-if="bookingError" class="p-4 bg-red-900/30 border border-red-500 rounded-lg text-red-200">
           {{ bookingError }}
         </div>
       </div>

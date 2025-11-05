@@ -11,13 +11,12 @@ router = APIRouter(prefix="/bookings", tags=["Бронирования (клие
 @router.post("/", response_model=booking_schemas.BookingResponse)
 def create_booking(
     booking_data: booking_schemas.BookingCreate,
-    client_id: int = Query(..., description="ID клиента"),
     db: Session = Depends(database.get_db)
 ):
     """Создать бронирование"""
 
     # Проверка: существует ли клиент
-    client = db.query(models.Client).filter(models.Client.id == client_id).first()
+    client = db.query(models.Client).filter(models.Client.id == booking_data.client_id).first()
     if not client:
         raise HTTPException(status_code=404, detail="Клиент не найден")
 
@@ -28,10 +27,10 @@ def create_booking(
 
     # Создаем бронирование
     new_booking = models.Booking(
-        client_id=client_id,
+        client_id=booking_data.client_id,
         section_id=booking_data.section_id,
-        booking_date=date.today(),
-        status="pending",
+        booking_date=booking_data.booking_date,
+        status="Ожидание",
         child_full_name=booking_data.child_full_name,
         child_age=booking_data.child_age
     )
@@ -40,7 +39,19 @@ def create_booking(
     db.commit()
     db.refresh(new_booking)
 
-    return new_booking
+    # Возвращаем с section_name
+    result = {
+        "id": new_booking.id,
+        "client_id": new_booking.client_id,
+        "section_id": new_booking.section_id,
+        "booking_date": new_booking.booking_date,
+        "status": new_booking.status,
+        "child_full_name": new_booking.child_full_name,
+        "child_age": new_booking.child_age,
+        "section_name": section.name
+    }
+
+    return result
 
 
 @router.get("/client/{client_id}", response_model=List[booking_schemas.BookingResponse])
