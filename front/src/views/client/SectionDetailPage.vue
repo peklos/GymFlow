@@ -72,8 +72,8 @@
 
         <!-- Call to Action -->
         <div class="card bg-gradient-to-br from-primary-50 to-accent-50 border-2 border-primary-200">
-          <h2 class="text-2xl font-bold text-slate-800 mb-4">Готов записаться?</h2>
-          <p class="text-slate-600 mb-6">
+          <h2 class="text-2xl font-bold mb-4" style="color: #1e293b !important;">Готов записаться?</h2>
+          <p class="mb-6" style="color: #475569 !important;">
             Посмотри расписание занятий и выбери удобное время для тренировки
           </p>
           <div class="flex flex-col sm:flex-row gap-4">

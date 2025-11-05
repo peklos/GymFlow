@@ -166,7 +166,7 @@
         <h2 class="text-4xl font-bold text-center mb-4">
           <span class="gradient-text">Популярные секции</span>
         </h2>
-        <p class="text-center text-slate-600 mb-12">
+        <p class="text-center mb-12" style="color: #475569 !important;">
           Самые востребованные направления для тренировок
         </p>
 
