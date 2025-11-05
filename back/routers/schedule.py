@@ -31,7 +31,26 @@ def get_schedule(
         query = query.filter(models.Schedule.day_of_week == day_of_week)
 
     schedules = query.all()
-    return schedules
+
+    # Добавляем вычисляемые поля
+    result = []
+    for schedule in schedules:
+        schedule_dict = {
+            "id": schedule.id,
+            "section_id": schedule.section_id,
+            "trainer_id": schedule.trainer_id,
+            "day_of_week": schedule.day_of_week,
+            "start_time": schedule.start_time,
+            "end_time": schedule.end_time,
+            "location": schedule.location,
+            "section_name": schedule.section.name if schedule.section else None,
+            "trainer_name": f"{schedule.trainer.last_name} {schedule.trainer.first_name}" if schedule.trainer else None,
+            "time_start": schedule.start_time.strftime("%H:%M") if schedule.start_time else None,
+            "time_end": schedule.end_time.strftime("%H:%M") if schedule.end_time else None
+        }
+        result.append(schedule_dict)
+
+    return result
 
 
 @router.get("/{schedule_id}", response_model=schedule_schemas.ScheduleResponse)
@@ -43,4 +62,17 @@ def get_schedule_item(schedule_id: int, db: Session = Depends(database.get_db)):
     if not schedule:
         raise HTTPException(status_code=404, detail="Элемент расписания не найден")
 
-    return schedule
+    # Добавляем вычисляемые поля
+    return {
+        "id": schedule.id,
+        "section_id": schedule.section_id,
+        "trainer_id": schedule.trainer_id,
+        "day_of_week": schedule.day_of_week,
+        "start_time": schedule.start_time,
+        "end_time": schedule.end_time,
+        "location": schedule.location,
+        "section_name": schedule.section.name if schedule.section else None,
+        "trainer_name": f"{schedule.trainer.last_name} {schedule.trainer.first_name}" if schedule.trainer else None,
+        "time_start": schedule.start_time.strftime("%H:%M") if schedule.start_time else None,
+        "time_end": schedule.end_time.strftime("%H:%M") if schedule.end_time else None
+    }
