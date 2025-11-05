@@ -70,7 +70,8 @@ app.include_router(admin_stats.router)
 def root():
     return {
         "message": "GymSystem API работает",
-        "version": "1.0.0",
+        "version": "1.0.1",
+        "status": "online",
         "docs": "/docs",
         "client_endpoints": "/auth, /profile, /sections, /schedule, /bookings",
         "admin_endpoints": "/admin/auth, /admin/clients, /admin/trainers, /admin/sections, /admin/schedule, /admin/bookings, /admin/attendance, /admin/employees, /admin/roles, /admin/stats"
