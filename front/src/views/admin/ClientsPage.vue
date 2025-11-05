@@ -2,7 +2,7 @@
   <div>
     <div class="mb-8">
       <h1 class="text-3xl font-bold text-slate-800 mb-2">Управление клиентами</h1>
-      <p class="text-slate-600">Просмотр и редактирование информации о клиентах</p>
+      <p class="text-slate-600" style="color: #0f172a !important;">Просмотр и редактирование информации о клиентах</p>
     </div>
 
     <LoadingSpinner v-if="isLoading" text="Загрузка клиентов..." />
