@@ -25,6 +25,7 @@ class BookingResponse(BaseModel):
     status: str
     child_full_name: Optional[str] = None
     child_age: Optional[int] = None
+    section_name: Optional[str] = None
 
     class Config:
         from_attributes = True

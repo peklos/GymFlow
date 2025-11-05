@@ -48,7 +48,22 @@ def get_client_bookings(client_id: int, db: Session = Depends(database.get_db)):
     """Получить все бронирования клиента"""
 
     bookings = db.query(models.Booking).filter(models.Booking.client_id == client_id).all()
-    return bookings
+
+    result = []
+    for booking in bookings:
+        booking_dict = {
+            "id": booking.id,
+            "client_id": booking.client_id,
+            "section_id": booking.section_id,
+            "booking_date": booking.booking_date,
+            "status": booking.status,
+            "child_full_name": booking.child_full_name,
+            "child_age": booking.child_age,
+            "section_name": booking.section.name if booking.section else None,
+        }
+        result.append(booking_dict)
+
+    return result
 
 
 @router.delete("/{booking_id}")
