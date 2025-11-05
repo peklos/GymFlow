@@ -56,14 +56,15 @@
             v-for="item in menuItems"
             :key="item.path"
             :to="item.path"
-            class="flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200"
+            class="flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 font-medium"
             :class="isActive(item.path)
               ? 'bg-gradient-to-r from-primary-600 to-accent-600 text-white shadow-lg'
-              : 'text-slate-700 hover:bg-slate-100'"
+              : 'hover:bg-slate-100'"
+            :style="!isActive(item.path) ? 'color: #1e293b !important;' : ''"
             @click="closeSidebar"
           >
             <component :is="item.icon" class="w-5 h-5" />
-            <span class="font-medium">{{ item.label }}</span>
+            <span>{{ item.label }}</span>
           </router-link>
         </nav>
       </aside>

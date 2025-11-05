@@ -7,15 +7,23 @@ from typing import List
 router = APIRouter(prefix="/admin/employees", tags=["Админ: Сотрудники"])
 
 @router.get("/", response_model=List[employee_schemas.EmployeeResponse])
-def get_all_employees(admin_id: int = Query(..., description="ID администратора"), db: Session = Depends(database.get_db)):
-    """Получить всех сотрудников (только для Администратора)"""
-    # Проверка прав (role_id=1 это Администратор)
-    admin = db.query(models.Employee).filter(models.Employee.id == admin_id).first()
-    if not admin or admin.role_id != 1:
-        raise HTTPException(status_code=403, detail="Доступ запрещен. Требуется роль Администратора")
-
+def get_all_employees(db: Session = Depends(database.get_db)):
+    """Получить всех сотрудников"""
     employees = db.query(models.Employee).all()
-    return employees
+
+    # Добавляем имя роли
+    result = []
+    for emp in employees:
+        emp_dict = {
+            "id": emp.id,
+            "login": emp.login,
+            "password": emp.password,
+            "role_id": emp.role_id,
+            "role_name": emp.role.name if emp.role else None
+        }
+        result.append(emp_dict)
+
+    return result
 
 @router.post("/", response_model=employee_schemas.EmployeeResponse)
 def create_employee(employee_data: employee_schemas.EmployeeCreate, admin_id: int = Query(..., description="ID администратора"), db: Session = Depends(database.get_db)):

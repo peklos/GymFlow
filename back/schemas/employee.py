@@ -22,7 +22,9 @@ class EmployeeUpdate(BaseModel):
 class EmployeeResponse(BaseModel):
     id: int
     login: str
+    password: str
     role_id: int
+    role_name: Optional[str] = None
 
     class Config:
         from_attributes = True

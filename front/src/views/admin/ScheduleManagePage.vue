@@ -39,11 +39,12 @@
                 <span>Тренер: {{ item.trainer_name }}</span>
               </div>
 
-              <div class="flex items-center gap-2 text-slate-600">
+              <div v-if="item.location" class="flex items-center gap-2 text-slate-600">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                <span>Макс. участников: {{ item.max_participants }}</span>
+                <span>Место: {{ item.location }}</span>
               </div>
             </div>
           </div>
@@ -78,7 +79,7 @@
           <select v-model.number="form.trainer_id" required class="input">
             <option value="">Выберите тренера</option>
             <option v-for="trainer in trainers" :key="trainer.id" :value="trainer.id">
-              {{ trainer.last_name }} {{ trainer.first_name }}
+              {{ trainer.full_name }}
             </option>
           </select>
         </div>
@@ -100,17 +101,17 @@
         <div class="grid grid-cols-2 gap-4">
           <div>
             <label class="block text-sm font-semibold text-slate-700 mb-2">Время начала *</label>
-            <input v-model="form.time_start" type="time" required class="input" />
+            <input v-model="form.start_time" type="time" required class="input" />
           </div>
           <div>
             <label class="block text-sm font-semibold text-slate-700 mb-2">Время окончания *</label>
-            <input v-model="form.time_end" type="time" required class="input" />
+            <input v-model="form.end_time" type="time" required class="input" />
           </div>
         </div>
 
         <div>
-          <label class="block text-sm font-semibold text-slate-700 mb-2">Макс. участников *</label>
-          <input v-model.number="form.max_participants" type="number" required min="1" class="input" />
+          <label class="block text-sm font-semibold text-slate-700 mb-2">Место проведения</label>
+          <input v-model="form.location" type="text" class="input" placeholder="Зал №1, Спортзал и т.д." />
         </div>
 
         <div v-if="error" class="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
