@@ -55,7 +55,7 @@
 | **Name** | `gymflow-api` (или любое другое) |
 | **Region** | Oregon (US West) |
 | **Branch** | `claude/backend-setup-start-011CUpeA3Yjvf432BVKuq5vi` |
-| **Root Directory** | оставить пустым |
+| **Root Directory** | `back` |
 | **Runtime** | `Python 3` |
 | **Build Command** | `./build.sh` |
 | **Start Command** | `./start.sh` |

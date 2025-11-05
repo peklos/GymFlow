@@ -1,9 +1,10 @@
 # GymFlow - Система управления спортзалом
 
-Backend API для системы управления тренажерным залом, построенный на FastAPI + PostgreSQL.
+Полнофункциональная система управления тренажерным залом с Backend API (FastAPI + PostgreSQL) и готовностью к разработке Frontend.
 
 ## Технологии
 
+### Backend (ready ✅)
 - **FastAPI** - современный веб-фреймворк для создания API
 - **SQLAlchemy** - ORM для работы с базой данных
 - **PostgreSQL** - основная база данных (для продакшена на Neon)
@@ -11,46 +12,61 @@ Backend API для системы управления тренажерным з
 - **Pydantic** - валидация данных и схемы
 - **Uvicorn** - ASGI сервер
 
+### Frontend (coming soon)
+- В разработке
+
 ## Структура проекта
 
 ```
 GymFlow/
-├── db/                     # База данных
-│   ├── database.py        # Конфигурация подключения
-│   ├── models.py          # SQLAlchemy модели
-│   └── init_data.py       # Тестовые данные
-├── schemas/               # Pydantic схемы
-│   ├── role.py
-│   ├── employee.py
-│   ├── user.py
-│   ├── trainer.py
-│   ├── section.py
-│   ├── schedule.py
-│   ├── booking.py
-│   └── attendance.py
-├── routers/               # API роутеры
-│   ├── auth.py           # Клиентская авторизация
-│   ├── profile.py        # Профиль клиента
-│   ├── sections.py       # Секции
-│   ├── schedule.py       # Расписание
-│   ├── bookings.py       # Бронирования
-│   └── admin_*.py        # Админские роутеры
-├── main.py               # Точка входа приложения
-├── requirements.txt      # Зависимости
-├── .env.example         # Пример конфигурации
-└── back/                # Документация
-    ├── README.md
-    ├── GYM_SYSTEM_FULL_ARCHITECTURE.md
-    ├── DATABASE_SCHEMA.md
-    ├── API_EXAMPLES.md
-    └── DEPLOYMENT_GUIDE.md
+├── back/                   # 🔧 BACKEND (готов)
+│   ├── db/                 # База данных
+│   │   ├── database.py     # Конфигурация подключения
+│   │   ├── models.py       # SQLAlchemy модели
+│   │   └── init_data.py    # Тестовые данные
+│   ├── schemas/            # Pydantic схемы
+│   │   ├── role.py
+│   │   ├── employee.py
+│   │   ├── user.py
+│   │   ├── trainer.py
+│   │   ├── section.py
+│   │   ├── schedule.py
+│   │   ├── booking.py
+│   │   └── attendance.py
+│   ├── routers/            # API роутеры
+│   │   ├── auth.py         # Клиентская авторизация
+│   │   ├── profile.py      # Профиль клиента
+│   │   ├── sections.py     # Секции
+│   │   ├── schedule.py     # Расписание
+│   │   ├── bookings.py     # Бронирования
+│   │   └── admin_*.py      # Админские роутеры
+│   ├── main.py             # Точка входа приложения
+│   ├── requirements.txt    # Зависимости
+│   ├── build.sh            # Скрипт сборки для Render
+│   ├── start.sh            # Скрипт запуска для Render
+│   ├── .env.example        # Пример конфигурации
+│   └── Документация:
+│       ├── README.md
+│       ├── API_ENDPOINTS.md
+│       ├── FRONTEND_GUIDE.md
+│       ├── DEPLOYMENT_CHECKLIST.md
+│       ├── GYM_SYSTEM_FULL_ARCHITECTURE.md
+│       ├── DATABASE_SCHEMA.md
+│       ├── API_EXAMPLES.md
+│       └── DEPLOYMENT_GUIDE.md
+│
+└── front/                  # 🎨 FRONTEND (будет создан)
+    └── (в разработке)
 ```
 
-## Быстрый старт
+## Быстрый старт (Backend)
 
 ### 1. Установка зависимостей
 
 ```bash
+# Перейти в папку backend
+cd back
+
 # Создать виртуальное окружение
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
@@ -62,7 +78,7 @@ pip install -r requirements.txt
 ### 2. Настройка базы данных
 
 ```bash
-# Скопировать пример конфигурации
+# Скопировать пример конфигурации (если еще не создан)
 cp .env.example .env
 
 # Для локальной разработки используется SQLite (по умолчанию)
@@ -73,6 +89,7 @@ cp .env.example .env
 ### 3. Запуск сервера
 
 ```bash
+# Из папки back/
 uvicorn main:app --reload
 ```
 
@@ -213,6 +230,7 @@ uvicorn main:app --reload
 ### Запуск в режиме разработки
 
 ```bash
+# Из папки back/
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
