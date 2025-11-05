@@ -44,19 +44,19 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: () => import('@/views/auth/LoginPage.vue'),
-      meta: { title: 'Вход' }
+      meta: { title: 'Вход', guestOnly: true }
     },
     {
       path: '/register',
       name: 'register',
       component: () => import('@/views/auth/RegisterPage.vue'),
-      meta: { title: 'Регистрация' }
+      meta: { title: 'Регистрация', guestOnly: true }
     },
     {
       path: '/admin/login',
       name: 'admin-login',
       component: () => import('@/views/auth/AdminLoginPage.vue'),
-      meta: { title: 'Вход для сотрудников' }
+      meta: { title: 'Вход для сотрудников', guestOnly: true }
     },
     {
       path: '/admin',
@@ -132,6 +132,16 @@ router.beforeEach((to, from, next) => {
   document.title = to.meta.title
     ? `${to.meta.title} - GymFlow`
     : 'GymFlow - Система управления спортзалом'
+
+  // Redirect authenticated users away from guest-only pages
+  if (to.meta.guestOnly && authStore.isAuthenticated) {
+    if (authStore.isAdmin) {
+      next({ name: 'admin-dashboard' })
+    } else {
+      next({ name: 'home' })
+    }
+    return
+  }
 
   // Check auth requirements
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
