@@ -127,11 +127,6 @@ const menuItems = [
     icon: 'BookingsIcon'
   },
   {
-    path: '/admin/attendance',
-    label: 'Посещаемость',
-    icon: 'AttendanceIcon'
-  },
-  {
     path: '/admin/employees',
     label: 'Сотрудники',
     icon: 'EmployeesIcon'

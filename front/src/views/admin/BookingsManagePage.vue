@@ -44,7 +44,7 @@
             <tr
               v-for="booking in bookings"
               :key="booking.id"
-              class="border-b border-slate-100 hover:bg-slate-50"
+              class="border-b border-slate-100 hover:bg-blue-50"
             >
               <td class="py-3 px-4">{{ booking.id }}</td>
               <td class="py-3 px-4 font-medium">{{ booking.client_name }}</td>

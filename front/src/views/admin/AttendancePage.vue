@@ -58,7 +58,7 @@
             <tr
               v-for="att in attendanceList"
               :key="att.id"
-              class="border-b border-slate-100 hover:bg-slate-50"
+              class="border-b border-slate-100 hover:bg-blue-50"
             >
               <td class="py-3 px-4 font-medium">{{ att.client_name }}</td>
               <td class="py-3 px-4">{{ att.section_name }}</td>
