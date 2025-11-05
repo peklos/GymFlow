@@ -44,7 +44,7 @@ def get_schedule(
             "end_time": schedule.end_time,
             "location": schedule.location,
             "section_name": schedule.section.name if schedule.section else None,
-            "trainer_name": f"{schedule.trainer.last_name} {schedule.trainer.first_name}" if schedule.trainer else None,
+            "trainer_name": schedule.trainer.full_name if schedule.trainer else None,
             "time_start": schedule.start_time.strftime("%H:%M") if schedule.start_time else None,
             "time_end": schedule.end_time.strftime("%H:%M") if schedule.end_time else None
         }
@@ -72,7 +72,7 @@ def get_schedule_item(schedule_id: int, db: Session = Depends(database.get_db)):
         "end_time": schedule.end_time,
         "location": schedule.location,
         "section_name": schedule.section.name if schedule.section else None,
-        "trainer_name": f"{schedule.trainer.last_name} {schedule.trainer.first_name}" if schedule.trainer else None,
+        "trainer_name": schedule.trainer.full_name if schedule.trainer else None,
         "time_start": schedule.start_time.strftime("%H:%M") if schedule.start_time else None,
         "time_end": schedule.end_time.strftime("%H:%M") if schedule.end_time else None
     }
