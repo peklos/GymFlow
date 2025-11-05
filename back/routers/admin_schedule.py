@@ -6,13 +6,31 @@ from typing import List
 
 router = APIRouter(prefix="/admin/schedule", tags=["Админ: Расписание"])
 
-@router.get("/", response_model=List[schedule_schemas.ScheduleResponse])
+@router.get("/")
 def get_all_schedules(db: Session = Depends(database.get_db)):
     """Получить все расписание"""
     schedules = db.query(models.Schedule).all()
-    return schedules
 
-@router.post("/", response_model=schedule_schemas.ScheduleResponse)
+    result = []
+    for schedule in schedules:
+        schedule_dict = {
+            "id": schedule.id,
+            "section_id": schedule.section_id,
+            "trainer_id": schedule.trainer_id,
+            "day_of_week": schedule.day_of_week,
+            "start_time": schedule.start_time,
+            "end_time": schedule.end_time,
+            "location": schedule.location,
+            "section_name": schedule.section.name if schedule.section else None,
+            "trainer_name": schedule.trainer.full_name if schedule.trainer else None,
+            "time_start": str(schedule.start_time) if schedule.start_time else None,
+            "time_end": str(schedule.end_time) if schedule.end_time else None,
+        }
+        result.append(schedule_dict)
+
+    return result
+
+@router.post("/")
 def create_schedule(schedule_data: schedule_schemas.ScheduleCreate, db: Session = Depends(database.get_db)):
     """Создать элемент расписания"""
     # Проверка секции
@@ -38,9 +56,21 @@ def create_schedule(schedule_data: schedule_schemas.ScheduleCreate, db: Session 
     db.commit()
     db.refresh(new_schedule)
 
-    return new_schedule
+    return {
+        "id": new_schedule.id,
+        "section_id": new_schedule.section_id,
+        "trainer_id": new_schedule.trainer_id,
+        "day_of_week": new_schedule.day_of_week,
+        "start_time": new_schedule.start_time,
+        "end_time": new_schedule.end_time,
+        "location": new_schedule.location,
+        "section_name": section.name,
+        "trainer_name": trainer.full_name,
+        "time_start": str(new_schedule.start_time) if new_schedule.start_time else None,
+        "time_end": str(new_schedule.end_time) if new_schedule.end_time else None,
+    }
 
-@router.patch("/{schedule_id}", response_model=schedule_schemas.ScheduleResponse)
+@router.patch("/{schedule_id}")
 def update_schedule(schedule_id: int, schedule_data: schedule_schemas.ScheduleUpdate, db: Session = Depends(database.get_db)):
     """Обновить элемент расписания"""
     schedule = db.query(models.Schedule).filter(models.Schedule.id == schedule_id).first()
@@ -58,13 +88,25 @@ def update_schedule(schedule_id: int, schedule_data: schedule_schemas.ScheduleUp
         schedule.start_time = schedule_data.start_time
     if schedule_data.end_time:
         schedule.end_time = schedule_data.end_time
-    if schedule_data.location:
+    if schedule_data.location is not None:
         schedule.location = schedule_data.location
 
     db.commit()
     db.refresh(schedule)
 
-    return schedule
+    return {
+        "id": schedule.id,
+        "section_id": schedule.section_id,
+        "trainer_id": schedule.trainer_id,
+        "day_of_week": schedule.day_of_week,
+        "start_time": schedule.start_time,
+        "end_time": schedule.end_time,
+        "location": schedule.location,
+        "section_name": schedule.section.name if schedule.section else None,
+        "trainer_name": schedule.trainer.full_name if schedule.trainer else None,
+        "time_start": str(schedule.start_time) if schedule.start_time else None,
+        "time_end": str(schedule.end_time) if schedule.end_time else None,
+    }
 
 @router.delete("/{schedule_id}")
 def delete_schedule(schedule_id: int, db: Session = Depends(database.get_db)):

@@ -168,9 +168,9 @@ const form = ref({
   section_id: '',
   trainer_id: '',
   day_of_week: '',
-  time_start: '09:00',
-  time_end: '10:00',
-  max_participants: 10
+  start_time: '09:00',
+  end_time: '10:00',
+  location: ''
 })
 
 onMounted(async () => {
@@ -213,9 +213,9 @@ const openCreateModal = () => {
     section_id: '',
     trainer_id: '',
     day_of_week: '',
-    time_start: '09:00',
-    time_end: '10:00',
-    max_participants: 10
+    start_time: '09:00',
+    end_time: '10:00',
+    location: ''
   }
   error.value = ''
   showModal.value = true
@@ -227,9 +227,9 @@ const openEditModal = (item) => {
     section_id: item.section_id,
     trainer_id: item.trainer_id,
     day_of_week: item.day_of_week,
-    time_start: item.time_start,
-    time_end: item.time_end,
-    max_participants: item.max_participants
+    start_time: item.time_start,
+    end_time: item.time_end,
+    location: item.location || ''
   }
   error.value = ''
   showModal.value = true
