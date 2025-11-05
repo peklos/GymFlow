@@ -13,7 +13,7 @@
 
       <!-- Filters -->
       <div class="card mb-8 max-w-4xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label class="block text-sm font-semibold text-slate-700 mb-2">
               Секция
@@ -40,18 +40,6 @@
               <option value="Суббота">Суббота</option>
               <option value="Воскресенье">Воскресенье</option>
             </select>
-          </div>
-
-          <div>
-            <label class="block text-sm font-semibold text-slate-700 mb-2">
-              Время
-            </label>
-            <input
-              v-model="filters.time_start"
-              type="time"
-              class="input"
-              @change="loadSchedule"
-            />
           </div>
         </div>
       </div>
@@ -127,25 +115,25 @@
     <!-- Booking Modal -->
     <Modal v-model="showBookingModal" title="Забронировать занятие">
       <div v-if="selectedSchedule" class="space-y-4">
-        <div>
-          <h4 class="font-semibold text-slate-100 mb-2">{{ selectedSchedule.section_name }}</h4>
-          <p class="text-slate-300">Тренер: {{ selectedSchedule.trainer_name }}</p>
-          <p class="text-slate-300">{{ selectedSchedule.day_of_week }}, {{ formatTime(selectedSchedule.time_start) }}</p>
+        <div class="p-4 bg-white rounded-lg">
+          <h4 class="font-semibold text-slate-900 mb-2">{{ selectedSchedule.section_name }}</h4>
+          <p class="text-slate-700">Тренер: {{ selectedSchedule.trainer_name }}</p>
+          <p class="text-slate-700">{{ selectedSchedule.day_of_week }}, {{ formatTime(selectedSchedule.time_start) }}</p>
         </div>
 
         <div>
-          <label class="block text-sm font-semibold text-slate-200 mb-2">
+          <label class="block text-sm font-semibold text-slate-900 mb-2">
             Дата занятия
           </label>
           <input
             v-model="bookingDate"
             type="date"
             :min="minDate"
-            class="input"
+            class="input bg-white text-slate-900"
           />
         </div>
 
-        <div v-if="bookingError" class="p-4 bg-red-900/30 border border-red-500 rounded-lg text-red-200">
+        <div v-if="bookingError" class="p-4 bg-red-50 border border-red-300 rounded-lg text-red-700">
           {{ bookingError }}
         </div>
       </div>
@@ -189,8 +177,7 @@ const isBooking = ref(false)
 
 const filters = ref({
   section_id: route.query.section_id || '',
-  day_of_week: '',
-  time_start: ''
+  day_of_week: ''
 })
 
 const minDate = computed(() => {
@@ -218,7 +205,6 @@ const loadSchedule = async () => {
     const params = {}
     if (filters.value.section_id) params.section_id = filters.value.section_id
     if (filters.value.day_of_week) params.day_of_week = filters.value.day_of_week
-    if (filters.value.time_start) params.time_start = filters.value.time_start
 
     const response = await scheduleService.getAll(params)
     scheduleItems.value = response.data
