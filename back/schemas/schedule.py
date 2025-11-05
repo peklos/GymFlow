@@ -27,6 +27,10 @@ class ScheduleUpdate(BaseModel):
 
 class ScheduleResponse(ScheduleBase):
     id: int
+    section_name: Optional[str] = None
+    trainer_name: Optional[str] = None
+    time_start: Optional[str] = None
+    time_end: Optional[str] = None
 
     class Config:
         from_attributes = True

@@ -25,52 +25,27 @@
             </div>
 
             <form v-if="isEditing" @submit.prevent="saveProfile" class="space-y-6">
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <label class="block text-sm font-semibold text-slate-700 mb-2">
-                    Фамилия *
-                  </label>
-                  <input
-                    v-model="editForm.last_name"
-                    type="text"
-                    required
-                    class="input"
-                  />
-                </div>
-
-                <div>
-                  <label class="block text-sm font-semibold text-slate-700 mb-2">
-                    Имя *
-                  </label>
-                  <input
-                    v-model="editForm.first_name"
-                    type="text"
-                    required
-                    class="input"
-                  />
-                </div>
-
-                <div>
-                  <label class="block text-sm font-semibold text-slate-700 mb-2">
-                    Отчество
-                  </label>
-                  <input
-                    v-model="editForm.patronymic"
-                    type="text"
-                    class="input"
-                  />
-                </div>
+              <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2">
+                  ФИО *
+                </label>
+                <input
+                  v-model="editForm.full_name"
+                  type="text"
+                  required
+                  class="input"
+                  placeholder="Иванов Иван Иванович"
+                />
               </div>
 
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label class="block text-sm font-semibold text-slate-700 mb-2">
-                    Дата рождения *
+                    Дата рождения
                   </label>
                   <input
-                    v-model="editForm.birth_date"
+                    v-model="editForm.date_of_birth"
                     type="date"
-                    required
                     class="input"
                   />
                 </div>
@@ -80,7 +55,7 @@
                     Телефон *
                   </label>
                   <input
-                    v-model="editForm.phone_number"
+                    v-model="editForm.phone"
                     type="tel"
                     required
                     class="input"
@@ -90,12 +65,14 @@
 
               <div>
                 <label class="block text-sm font-semibold text-slate-700 mb-2">
-                  Пол *
+                  Email *
                 </label>
-                <select v-model="editForm.gender" required class="input">
-                  <option value="Мужской">Мужской</option>
-                  <option value="Женский">Женский</option>
-                </select>
+                <input
+                  v-model="editForm.email"
+                  type="email"
+                  required
+                  class="input"
+                />
               </div>
 
               <div>
@@ -136,28 +113,28 @@
                 <div>
                   <p class="text-sm text-slate-500 mb-1">ФИО</p>
                   <p class="text-lg font-semibold text-slate-800">
-                    {{ profile.last_name }} {{ profile.first_name }} {{ profile.patronymic }}
+                    {{ profile.full_name || 'Не указано' }}
                   </p>
                 </div>
 
                 <div>
                   <p class="text-sm text-slate-500 mb-1">Дата рождения</p>
                   <p class="text-lg font-semibold text-slate-800">
-                    {{ formatDate(profile.birth_date) }}
+                    {{ formatDate(profile.date_of_birth) }}
                   </p>
                 </div>
 
                 <div>
                   <p class="text-sm text-slate-500 mb-1">Телефон</p>
                   <p class="text-lg font-semibold text-slate-800">
-                    {{ profile.phone_number }}
+                    {{ profile.phone || 'Не указано' }}
                   </p>
                 </div>
 
                 <div>
-                  <p class="text-sm text-slate-500 mb-1">Пол</p>
+                  <p class="text-sm text-slate-500 mb-1">Email</p>
                   <p class="text-lg font-semibold text-slate-800">
-                    {{ profile.gender }}
+                    {{ profile.email || 'Не указано' }}
                   </p>
                 </div>
 
@@ -274,7 +251,9 @@ const saveProfile = async () => {
 }
 
 const formatDate = (dateString) => {
+  if (!dateString) return 'Не указано'
   const date = new Date(dateString)
+  if (isNaN(date.getTime())) return 'Не указано'
   return date.toLocaleDateString('ru-RU')
 }
 </script>
