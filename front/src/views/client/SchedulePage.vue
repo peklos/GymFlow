@@ -83,7 +83,7 @@
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <span>{{ item.time_start.substring(0, 5) }} - {{ item.time_end.substring(0, 5) }}</span>
+              <span>{{ formatTime(item.time_start) }} - {{ formatTime(item.time_end) }}</span>
             </div>
 
             <div class="flex items-center gap-2 text-slate-600">
@@ -129,7 +129,7 @@
         <div>
           <h4 class="font-semibold text-slate-800 mb-2">{{ selectedSchedule.section_name }}</h4>
           <p class="text-slate-600">Тренер: {{ selectedSchedule.trainer_name }}</p>
-          <p class="text-slate-600">{{ selectedSchedule.day_of_week }}, {{ selectedSchedule.time_start.substring(0, 5) }}</p>
+          <p class="text-slate-600">{{ selectedSchedule.day_of_week }}, {{ formatTime(selectedSchedule.time_start) }}</p>
         </div>
 
         <div>
@@ -233,6 +233,11 @@ const openBookingModal = (schedule) => {
   bookingDate.value = minDate.value
   bookingError.value = ''
   showBookingModal.value = true
+}
+
+const formatTime = (time) => {
+  if (!time) return 'Не указано'
+  return typeof time === 'string' ? time.substring(0, 5) : time
 }
 
 const createBooking = async () => {
