@@ -64,16 +64,24 @@
                 </span>
               </td>
               <td class="py-3 px-4">
-                <select
-                  v-if="booking.status !== 'Отменено'"
-                  @change="updateStatus(booking, $event.target.value)"
-                  :value="booking.status"
-                  class="text-sm border border-slate-300 rounded px-2 py-1"
-                >
-                  <option value="Ожидание">Ожидание</option>
-                  <option value="Подтверждено">Подтверждено</option>
-                  <option value="Отменено">Отменено</option>
-                </select>
+                <div class="flex gap-2">
+                  <button
+                    @click="viewDetails(booking)"
+                    class="text-sm text-blue-600 hover:text-blue-800 font-medium"
+                  >
+                    Подробнее
+                  </button>
+                  <select
+                    v-if="booking.status !== 'Отменено'"
+                    @change="updateStatus(booking, $event.target.value)"
+                    :value="booking.status"
+                    class="text-sm border border-slate-300 rounded px-2 py-1"
+                  >
+                    <option value="Ожидание">Ожидание</option>
+                    <option value="Подтверждено">Подтверждено</option>
+                    <option value="Отменено">Отменено</option>
+                  </select>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -84,16 +92,109 @@
     <div v-else class="card text-center py-12">
       <p class="text-slate-600">Бронирования не найдены</p>
     </div>
+
+    <!-- Booking Details Modal -->
+    <Modal v-model="showDetailsModal" title="Детали бронирования">
+      <LoadingSpinner v-if="isLoadingDetails" text="Загрузка..." />
+
+      <div v-else-if="selectedBooking" class="space-y-4">
+        <!-- Booking Info -->
+        <div class="border-b border-slate-200 pb-4">
+          <h3 class="text-lg font-bold text-slate-800 mb-3">Информация о бронировании</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <p class="text-sm text-slate-500">ID бронирования</p>
+              <p class="font-semibold text-slate-800">{{ selectedBooking.id }}</p>
+            </div>
+            <div>
+              <p class="text-sm text-slate-500">Статус</p>
+              <p>
+                <span
+                  class="badge"
+                  :class="{
+                    'badge-success': selectedBooking.status === 'Подтверждено',
+                    'badge-warning': selectedBooking.status === 'Ожидание',
+                    'badge-danger': selectedBooking.status === 'Отменено'
+                  }"
+                >
+                  {{ selectedBooking.status }}
+                </span>
+              </p>
+            </div>
+            <div>
+              <p class="text-sm text-slate-500">Дата создания</p>
+              <p class="font-semibold text-slate-800">{{ formatDate(selectedBooking.created_at) }}</p>
+            </div>
+            <div>
+              <p class="text-sm text-slate-500">Дата занятия</p>
+              <p class="font-semibold text-slate-800">{{ formatDate(selectedBooking.booking_date) }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Client Info -->
+        <div class="border-b border-slate-200 pb-4">
+          <h3 class="text-lg font-bold text-slate-800 mb-3">Клиент</h3>
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl flex items-center justify-center">
+              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </div>
+            <div>
+              <p class="font-bold text-slate-800">{{ selectedBooking.client_name || 'Не указано' }}</p>
+              <p class="text-sm text-slate-600">ID клиента: {{ selectedBooking.client_id }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Schedule Info -->
+        <div class="border-b border-slate-200 pb-4">
+          <h3 class="text-lg font-bold text-slate-800 mb-3">Расписание</h3>
+          <div class="bg-slate-50 rounded-lg p-4">
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <p class="text-sm text-slate-500">Секция</p>
+                <p class="font-semibold text-slate-800">{{ selectedBooking.section_name || 'Не указано' }}</p>
+              </div>
+              <div>
+                <p class="text-sm text-slate-500">ID расписания</p>
+                <p class="font-semibold text-slate-800">{{ selectedBooking.schedule_id }}</p>
+              </div>
+              <div>
+                <p class="text-sm text-slate-500">Время начала</p>
+                <p class="font-semibold text-slate-800">{{ selectedBooking.time_start || 'Не указано' }}</p>
+              </div>
+              <div>
+                <p class="text-sm text-slate-500">Время окончания</p>
+                <p class="font-semibold text-slate-800">{{ selectedBooking.time_end || 'Не указано' }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="pt-4">
+          <button @click="showDetailsModal = false" class="btn btn-secondary w-full">
+            Закрыть
+          </button>
+        </div>
+      </div>
+    </Modal>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import LoadingSpinner from '@/components/common/LoadingSpinner.vue'
+import Modal from '@/components/common/Modal.vue'
 import { adminBookingsService } from '@/api/services'
 
 const bookings = ref([])
 const isLoading = ref(false)
+const showDetailsModal = ref(false)
+const isLoadingDetails = ref(false)
+const selectedBooking = ref(null)
 
 const stats = computed(() => {
   const total = bookings.value.length
@@ -119,6 +220,21 @@ const loadBookings = async () => {
   }
 }
 
+const viewDetails = async (booking) => {
+  try {
+    isLoadingDetails.value = true
+    showDetailsModal.value = true
+    const response = await adminBookingsService.getById(booking.id)
+    selectedBooking.value = response.data
+  } catch (err) {
+    console.error('Error loading booking details:', err)
+    alert('Ошибка загрузки деталей бронирования')
+    showDetailsModal.value = false
+  } finally {
+    isLoadingDetails.value = false
+  }
+}
+
 const updateStatus = async (booking, newStatus) => {
   try {
     await adminBookingsService.updateStatus(booking.id, { status: newStatus })
@@ -131,6 +247,7 @@ const updateStatus = async (booking, newStatus) => {
 }
 
 const formatDate = (dateString) => {
+  if (!dateString) return 'Не указано'
   const date = new Date(dateString)
   return date.toLocaleDateString('ru-RU')
 }
