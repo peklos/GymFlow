@@ -17,7 +17,7 @@
         <div class="card border-2 border-slate-200">
           <form @submit.prevent="handleLogin" class="space-y-6">
             <div>
-              <label class="block text-sm font-semibold text-slate-700 mb-2">
+              <label class="block text-sm font-semibold mb-2" style="color: #334155 !important;">
                 Логин сотрудника
               </label>
               <input
@@ -25,13 +25,14 @@
                 type="text"
                 required
                 placeholder="admin@gym.ru"
-                class="input"
-                :class="{ 'input-error': error }"
+                style="color: #0f172a !important;"
+                class="w-full px-4 py-3 bg-white border-2 border-slate-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+                :class="{ 'border-red-500': error }"
               />
             </div>
 
             <div>
-              <label class="block text-sm font-semibold text-slate-700 mb-2">
+              <label class="block text-sm font-semibold mb-2" style="color: #334155 !important;">
                 Пароль
               </label>
               <input
@@ -39,13 +40,14 @@
                 type="password"
                 required
                 placeholder="••••••••"
-                class="input"
-                :class="{ 'input-error': error }"
+                style="color: #0f172a !important;"
+                class="w-full px-4 py-3 bg-white border-2 border-slate-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+                :class="{ 'border-red-500': error }"
               />
             </div>
 
-            <div v-if="error" class="p-4 bg-red-50 border border-red-200 rounded-lg">
-              <p class="text-red-700 text-sm">{{ error }}</p>
+            <div v-if="error" class="p-4 bg-red-50 border-2 border-red-300 rounded-lg">
+              <p style="color: #991b1b !important;" class="text-sm font-semibold">{{ error }}</p>
             </div>
 
             <button
@@ -58,7 +60,7 @@
           </form>
 
           <div class="mt-6 pt-6 border-t border-slate-200 text-center">
-            <router-link to="/login" class="text-sm text-slate-500 hover:text-slate-700">
+            <router-link to="/login" style="color: #64748b !important;" class="text-sm hover:text-slate-700">
               ← Вход для клиентов
             </router-link>
           </div>
@@ -66,15 +68,15 @@
 
         <!-- Test Credentials -->
         <div class="mt-6 p-4 bg-slate-100 border border-slate-200 rounded-lg">
-          <p class="text-sm font-semibold text-slate-800 mb-2">Тестовые данные:</p>
+          <p class="text-sm font-semibold mb-2" style="color: #1e293b !important;">Тестовые данные:</p>
           <div class="space-y-1">
             <div class="text-sm">
-              <span class="text-slate-600">Администратор:</span>
-              <span class="ml-2 font-mono text-slate-800">admin@gym.ru / admin123</span>
+              <span style="color: #475569 !important;">Администратор:</span>
+              <span class="ml-2 font-mono" style="color: #1e293b !important;">admin@gym.ru / admin123</span>
             </div>
             <div class="text-sm">
-              <span class="text-slate-600">Менеджер:</span>
-              <span class="ml-2 font-mono text-slate-800">manager@gym.ru / manager123</span>
+              <span style="color: #475569 !important;">Менеджер:</span>
+              <span class="ml-2 font-mono" style="color: #1e293b !important;">manager@gym.ru / manager123</span>
             </div>
           </div>
         </div>
@@ -84,7 +86,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import MainLayout from '@/components/layout/MainLayout.vue'
 import { useAuthStore } from '@/stores/auth'
@@ -100,6 +102,13 @@ const form = ref({
 
 const error = ref('')
 const isLoading = ref(false)
+
+// Logout any existing user when accessing admin login page
+onMounted(() => {
+  if (authStore.isAuthenticated) {
+    authStore.logout()
+  }
+})
 
 const handleLogin = async () => {
   try {

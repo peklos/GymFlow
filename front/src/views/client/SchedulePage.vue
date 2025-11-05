@@ -114,27 +114,46 @@
 
     <!-- Booking Modal -->
     <Modal v-model="showBookingModal" title="Забронировать занятие">
-      <div v-if="selectedSchedule" class="space-y-4">
-        <div class="p-4 bg-white rounded-lg">
-          <h4 class="font-semibold text-slate-900 mb-2">{{ selectedSchedule.section_name }}</h4>
-          <p class="text-slate-700">Тренер: {{ selectedSchedule.trainer_name }}</p>
-          <p class="text-slate-700">{{ selectedSchedule.day_of_week }}, {{ formatTime(selectedSchedule.time_start) }}</p>
+      <div v-if="selectedSchedule" class="space-y-6">
+        <div class="p-5 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-200">
+          <h4 class="font-bold mb-3 text-lg" style="color: #0f172a !important;">{{ selectedSchedule.section_name }}</h4>
+          <div class="space-y-2">
+            <p class="flex items-center gap-2" style="color: #334155 !important;">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              <span><strong>Тренер:</strong> {{ selectedSchedule.trainer_name }}</span>
+            </p>
+            <p class="flex items-center gap-2" style="color: #334155 !important;">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span><strong>День:</strong> {{ selectedSchedule.day_of_week }}</span>
+            </p>
+            <p class="flex items-center gap-2" style="color: #334155 !important;">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span><strong>Время:</strong> {{ formatTime(selectedSchedule.time_start) }}</span>
+            </p>
+          </div>
         </div>
 
         <div>
-          <label class="block text-sm font-semibold text-slate-900 mb-2">
-            Дата занятия
+          <label class="block text-sm font-bold mb-2" style="color: #0f172a !important;">
+            Выберите дату занятия
           </label>
           <input
             v-model="bookingDate"
             type="date"
             :min="minDate"
-            class="input bg-white text-slate-900"
+            style="color: #0f172a !important;"
+            class="w-full px-4 py-3 bg-white border-2 border-slate-300 rounded-lg font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
           />
         </div>
 
-        <div v-if="bookingError" class="p-4 bg-red-50 border border-red-300 rounded-lg text-red-700">
-          {{ bookingError }}
+        <div v-if="bookingError" class="p-4 bg-red-50 border-2 border-red-300 rounded-lg">
+          <p style="color: #991b1b !important;" class="font-semibold">{{ bookingError }}</p>
         </div>
       </div>
 
