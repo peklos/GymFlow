@@ -3,10 +3,10 @@
     <div class="prose prose-slate max-w-none">
       <!-- Введение -->
       <div class="bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl mb-6 border border-blue-100">
-        <h3 class="text-2xl font-bold text-slate-800 mb-3 flex items-center gap-2">
+        <h3 class="text-2xl font-bold text-black mb-3 flex items-center gap-2">
           👋 Добро пожаловать в GymFlow!
         </h3>
-        <p class="text-slate-700 text-base leading-relaxed mb-0">
+        <p class="text-black text-base leading-relaxed mb-0">
           Этот справочник поможет вам быстро освоиться с системой и начать тренировки.
           Здесь вы найдете пошаговые инструкции по всем основным функциям сайта.
         </p>
@@ -14,14 +14,14 @@
 
       <!-- Навигация по сайту -->
       <div class="mb-6">
-        <h4 class="text-xl font-bold text-slate-800 mb-3 flex items-center gap-2">
+        <h4 class="text-xl font-bold text-black mb-3 flex items-center gap-2">
           🧭 Навигация по сайту
         </h4>
         <div class="bg-slate-50 p-5 rounded-lg border border-slate-200">
-          <p class="text-slate-700 mb-3 text-base">
+          <p class="text-black mb-3 text-base">
             В верхней части сайта расположено главное меню с разделами:
           </p>
-          <ul class="space-y-2 text-slate-700 text-base">
+          <ul class="space-y-2 text-black text-base">
             <li class="flex items-start gap-2">
               <span class="text-blue-500 font-bold">•</span>
               <span><strong>Главная</strong> — главная страница с популярными секциями</span>
@@ -48,11 +48,11 @@
 
       <!-- Как посмотреть секции -->
       <div class="mb-6">
-        <h4 class="text-xl font-bold text-slate-800 mb-3 flex items-center gap-2">
+        <h4 class="text-xl font-bold text-black mb-3 flex items-center gap-2">
           🏋️ Как посмотреть секции
         </h4>
         <div class="bg-green-50 p-5 rounded-lg border border-green-200">
-          <ol class="space-y-3 text-slate-700 text-base list-none">
+          <ol class="space-y-3 text-black text-base list-none">
             <li class="flex items-start gap-3">
               <span class="flex-shrink-0 w-6 h-6 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold">1</span>
               <span>Нажмите на кнопку <strong>"Секции"</strong> в верхнем меню или кнопку <strong>"Все секции"</strong> на главной странице</span>
@@ -71,11 +71,11 @@
 
       <!-- Как посмотреть тренеров -->
       <div class="mb-6">
-        <h4 class="text-xl font-bold text-slate-800 mb-3 flex items-center gap-2">
+        <h4 class="text-xl font-bold text-black mb-3 flex items-center gap-2">
           👨‍🏫 Как посмотреть тренеров
         </h4>
         <div class="bg-purple-50 p-5 rounded-lg border border-purple-200">
-          <ol class="space-y-3 text-slate-700 text-base list-none">
+          <ol class="space-y-3 text-black text-base list-none">
             <li class="flex items-start gap-3">
               <span class="flex-shrink-0 w-6 h-6 bg-purple-500 text-white rounded-full flex items-center justify-center text-sm font-bold">1</span>
               <span>Перейдите в раздел <strong>"Секции"</strong> и выберите интересующую вас программу</span>
@@ -94,11 +94,11 @@
 
       <!-- Как посмотреть расписание -->
       <div class="mb-6">
-        <h4 class="text-xl font-bold text-slate-800 mb-3 flex items-center gap-2">
+        <h4 class="text-xl font-bold text-black mb-3 flex items-center gap-2">
           📅 Как посмотреть расписание
         </h4>
         <div class="bg-blue-50 p-5 rounded-lg border border-blue-200">
-          <ol class="space-y-3 text-slate-700 text-base list-none">
+          <ol class="space-y-3 text-black text-base list-none">
             <li class="flex items-start gap-3">
               <span class="flex-shrink-0 w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold">1</span>
               <span>Нажмите на кнопку <strong>"Расписание"</strong> в верхнем меню</span>
@@ -121,11 +121,11 @@
 
       <!-- Как забронировать занятие -->
       <div class="mb-6">
-        <h4 class="text-xl font-bold text-slate-800 mb-3 flex items-center gap-2">
+        <h4 class="text-xl font-bold text-black mb-3 flex items-center gap-2">
           ✅ Как забронировать занятие
         </h4>
         <div class="bg-orange-50 p-5 rounded-lg border border-orange-200">
-          <ol class="space-y-3 text-slate-700 text-base list-none">
+          <ol class="space-y-3 text-black text-base list-none">
             <li class="flex items-start gap-3">
               <span class="flex-shrink-0 w-6 h-6 bg-orange-500 text-white rounded-full flex items-center justify-center text-sm font-bold">1</span>
               <span>Перейдите в раздел <strong>"Расписание"</strong> и найдите нужное занятие</span>
@@ -148,7 +148,7 @@
             </li>
           </ol>
           <div class="mt-4 p-3 bg-white rounded-lg border-l-4 border-orange-400">
-            <p class="text-sm text-slate-700 mb-0">
+            <p class="text-sm text-black mb-0">
               <strong>💡 Совет:</strong> Вы можете отменить бронирование в разделе "Мои бронирования" не позднее чем за 2 часа до начала занятия.
             </p>
           </div>
@@ -157,11 +157,11 @@
 
       <!-- Мои бронирования -->
       <div class="mb-6">
-        <h4 class="text-xl font-bold text-slate-800 mb-3 flex items-center gap-2">
+        <h4 class="text-xl font-bold text-black mb-3 flex items-center gap-2">
           📋 Мои бронирования
         </h4>
         <div class="bg-indigo-50 p-5 rounded-lg border border-indigo-200">
-          <ol class="space-y-3 text-slate-700 text-base list-none">
+          <ol class="space-y-3 text-black text-base list-none">
             <li class="flex items-start gap-3">
               <span class="flex-shrink-0 w-6 h-6 bg-indigo-500 text-white rounded-full flex items-center justify-center text-sm font-bold">1</span>
               <span>Нажмите на <strong>"Мои бронирования"</strong> в верхнем меню</span>
@@ -184,14 +184,14 @@
 
       <!-- Профиль -->
       <div class="mb-6">
-        <h4 class="text-xl font-bold text-slate-800 mb-3 flex items-center gap-2">
+        <h4 class="text-xl font-bold text-black mb-3 flex items-center gap-2">
           👤 Профиль
         </h4>
         <div class="bg-teal-50 p-5 rounded-lg border border-teal-200">
-          <p class="text-slate-700 mb-3 text-base">
+          <p class="text-black mb-3 text-base">
             В разделе <strong>"Профиль"</strong> вы можете:
           </p>
-          <ul class="space-y-2 text-slate-700 text-base">
+          <ul class="space-y-2 text-black text-base">
             <li class="flex items-start gap-2">
               <span class="text-teal-500 font-bold">•</span>
               <span>Просмотреть и изменить свои личные данные (имя, email, телефон)</span>
@@ -214,10 +214,10 @@
 
       <!-- Дополнительные советы -->
       <div class="bg-gradient-to-br from-amber-50 to-yellow-50 p-6 rounded-xl border border-amber-200">
-        <h4 class="text-xl font-bold text-slate-800 mb-3 flex items-center gap-2">
+        <h4 class="text-xl font-bold text-black mb-3 flex items-center gap-2">
           💡 Полезные советы
         </h4>
-        <ul class="space-y-2 text-slate-700 text-base">
+        <ul class="space-y-2 text-black text-base">
           <li class="flex items-start gap-2">
             <span class="text-amber-500 font-bold">•</span>
             <span>Бронируйте занятия заранее, чтобы гарантировать себе место</span>
@@ -243,7 +243,7 @@
 
       <!-- Контакты -->
       <div class="mt-6 text-center p-4 bg-slate-100 rounded-lg">
-        <p class="text-slate-700 text-base mb-0">
+        <p class="text-black text-base mb-0">
           Если у вас остались вопросы, вы всегда можете обратиться к администратору зала или написать нам на почту.
           <br>
           <strong>Хороших тренировок! 💪</strong>

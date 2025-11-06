@@ -116,6 +116,7 @@ const navLinks = computed(() => {
     { path: '/', label: 'Главная' },
     { path: '/sections', label: 'Секции' },
     { path: '/schedule', label: 'Расписание' },
+    { path: '/search', label: 'Поиск' },
   ]
 
   if (authStore.isAuthenticated) {
