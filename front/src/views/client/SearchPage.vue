@@ -18,7 +18,7 @@
             v-model="searchQuery"
             type="text"
             placeholder="Введите что ищете... (например, 'записаться', 'расписание', 'профиль')"
-            class="w-full px-6 py-4 pr-12 text-lg rounded-2xl border-2 border-slate-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
+            class="w-full px-6 py-4 pr-12 text-lg text-black rounded-2xl border-2 border-slate-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
           />
           <svg
             class="absolute right-5 top-1/2 -translate-y-1/2 w-6 h-6 text-slate-400"
