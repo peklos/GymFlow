@@ -61,7 +61,7 @@
             </div>
 
             <!-- Title -->
-            <h3 class="text-xl font-bold text-center mb-3 text-black">
+            <h3 class="text-xl font-bold text-center mb-3 text-white">
               {{ action.title }}
             </h3>
 
@@ -75,7 +75,7 @@
               <span
                 v-for="tag in action.tags"
                 :key="tag"
-                class="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-medium"
+                class="px-3 py-1 bg-slate-100 text-black rounded-full text-xs font-medium"
               >
                 {{ tag }}
               </span>
