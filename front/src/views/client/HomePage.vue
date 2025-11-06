@@ -25,6 +25,13 @@
               <router-link to="/schedule" class="btn btn-secondary text-lg px-8 py-4">
                 Смотреть расписание
               </router-link>
+              <button
+                v-if="authStore.isAuthenticated"
+                @click="showHandbook = true"
+                class="btn bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-lg px-8 py-4 shadow-lg hover:shadow-xl transition-all"
+              >
+                📖 Справочник
+              </button>
             </div>
           </div>
 
@@ -191,6 +198,9 @@
       </div>
     </section>
 
+    <!-- Handbook Modal -->
+    <HandbookModal v-model="showHandbook" />
+
     <!-- CTA Section - Only show for non-authenticated users -->
     <section v-if="!authStore.isAuthenticated" class="py-20 relative overflow-hidden">
       <div class="container mx-auto px-4">
@@ -250,6 +260,7 @@ import { useRouter } from 'vue-router'
 import MainLayout from '@/components/layout/MainLayout.vue'
 import SectionCard from '@/components/sections/SectionCard.vue'
 import LoadingSpinner from '@/components/common/LoadingSpinner.vue'
+import HandbookModal from '@/components/common/HandbookModal.vue'
 import { useSectionsStore } from '@/stores/sections'
 import { useAuthStore } from '@/stores/auth'
 
@@ -259,6 +270,7 @@ const authStore = useAuthStore()
 
 const popularSections = ref([])
 const isLoading = ref(false)
+const showHandbook = ref(false)
 
 onMounted(async () => {
   try {
