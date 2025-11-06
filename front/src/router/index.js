@@ -29,6 +29,12 @@ const router = createRouter({
       meta: { title: 'Расписание' }
     },
     {
+      path: '/search',
+      name: 'search',
+      component: () => import('@/views/client/SearchPage.vue'),
+      meta: { title: 'Поиск' }
+    },
+    {
       path: '/profile',
       name: 'profile',
       component: () => import('@/views/client/ProfilePage.vue'),
